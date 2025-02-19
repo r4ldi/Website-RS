@@ -14,28 +14,27 @@ if (!isset($_SESSION['username'])) {
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
-    <!-- Navbar -->
-    <nav class="bg-rose-600 p-4">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
-        <a href="main.php" class="flex items-center space-x-2">
-            <span class="text-white text-2xl font-bold font-serif">Rumah Sakit</span>
-        </a>
-        <ul class="flex space-x-6 text-white">
-            <li><a href="main.php" class="hover:text-gray-300">Home</a></li>
-            <li><a href="dokter.php" class="hover:text-gray-300">Dokter</a></li>
-            <li><a href="pasien.php" class="hover:text-gray-300">Pasien</a></li>
-            <li><a href="event.php" class="hover:text-gray-300">Event</a></li>
-            <li><a href="pendaftaran.php" class="hover:text-gray-300">Pendaftaran</a></li>
-            <li><a href="dokumentasi.php" class="hover:text-gray-300">Dokumentasi</a></li>
-            <li><a href="logout.php" class="hover:text-gray-300">Logout</a></li>
-        </ul>
-    </div>
-</nav>
+ <!-- Navbar -->
+ <nav class="bg-rose-600 p-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="main.php" class="text-white text-2xl font-bold font-serif">Hermina</a>
+            <ul class="flex space-x-6 text-white">
+                <li><a href="main.php">Home</a></li>
+                <li><a href="dokter.php">Dokter</a></li>
+                <li><a href="pasien.php">Pasien</a></li>
+                <li><a href="event.php">Event</a></li>
+                <li><a href="pendaftaran.php">Pendaftaran</a></li>
+                <li><a href="merchandise.php">Obat</a></li>
+                <li><a href="logout.php">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
     
     <!-- Dokter Section -->
     <section class="flex flex-col items-center justify-center py-16 bg-white text-center">
         <h2 class="text-3xl font-bold">Dokter</h2>
-        <img src="dokter.jpg" alt="Dokter" class="w-40 h-40 rounded-full mt-4">
+        <img src="Raldi.jpg" alt="Dokter" class="w-40 h-40 rounded-full mt-4">
         <h3 class="text-2xl font-semibold mt-2">Dr. Raldi</h3>
         <p class="text-lg mt-2">Email: <span class="font-bold">raldisikma123@gmail.com</span></p>
         <p class="text-lg">Instagram: <span class="font-bold">@r4ldi</span></p>

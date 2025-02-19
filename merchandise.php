@@ -39,6 +39,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_to_cart'])) {
     header("Location: merchandise.php");
     exit;
 }
+
+// Update jumlah item di keranjang belanja
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_cart'])) {
+    $obat_name = $_POST['obat_name'];
+    $action = $_POST['update_cart'];
+
+    if (isset($_SESSION['cart'][$obat_name])) {
+        if ($action == '+') {
+            $_SESSION['cart'][$obat_name]['quantity'] += 1;
+        } elseif ($action == '-' && $_SESSION['cart'][$obat_name]['quantity'] > 1) {
+            $_SESSION['cart'][$obat_name]['quantity'] -= 1;
+        } elseif ($action == '-' && $_SESSION['cart'][$obat_name]['quantity'] == 1) {
+            unset($_SESSION['cart'][$obat_name]);
+        }
+    }
+    header("Location: merchandise.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -54,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_to_cart'])) {
     <nav class="bg-rose-600 p-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="main.php" class="flex items-center space-x-2">
-                <span class="text-white text-2xl font-bold font-serif">Rumah Sakit</span>
+                <span class="text-white text-2xl font-bold font-serif">Hermina</span>
             </a>
             <ul class="flex space-x-6 text-white">
                 <li><a href="main.php" class="hover:text-gray-300">Home</a></li>
@@ -62,8 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_to_cart'])) {
                 <li><a href="pasien.php" class="hover:text-gray-300">Pasien</a></li>
                 <li><a href="event.php" class="hover:text-gray-300">Event</a></li>
                 <li><a href="pendaftaran.php" class="hover:text-gray-300">Pendaftaran</a></li>
-                <li><a href="dokumentasi.php" class="hover:text-gray-300">Dokumentasi</a></li>
-                <li><a href="merchandise.php" class="hover:text-gray-300">Tempat Beli Obat</a></li>
+                <li><a href="merchandise.php" class="hover:text-gray-300">Obat</a></li>
                 <li><a href="logout.php" class="hover:text-gray-300">Logout</a></li>
             </ul>
         </div>

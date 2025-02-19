@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'tcpdf/tcpdf.php';
+include 'db.php';
 
 if (!isset($_SESSION['user_id'])) {
     die("Anda harus login terlebih dahulu.");
@@ -10,8 +11,12 @@ if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
     die("Keranjang belanja kosong.");
 }
 
+if (!isset($_SESSION['fullname'])) {
+    die("Nama pembeli tidak ditemukan dalam session.");
+}
+
 // Ambil nama pembeli dari session
-$nama_pembeli = $_SESSION['fullname']; 
+$nama_pembeli = $_SESSION['fullname'];
 
 // Simulasi alamat toko
 $alamat_toko = "Jl. Merdeka No. 17, Jakarta";

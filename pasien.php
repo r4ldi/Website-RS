@@ -2,6 +2,18 @@
 session_start();
 include 'db.php'; // Memastikan koneksi database di-load
 
+// Handle delete request
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+    try {
+        $stmt = $pdo->prepare("DELETE FROM patients WHERE id = ?");
+        $stmt->execute([$id]);
+        header("Location: pasien.php");
+        exit;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +21,7 @@ include 'db.php'; // Memastikan koneksi database di-load
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Anggota - Rumah Sakit</title>
+    <title>Daftar Pasien - Rumah Sakit</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
@@ -23,14 +35,13 @@ include 'db.php'; // Memastikan koneksi database di-load
                 <li><a href="pasien.php">Pasien</a></li>
                 <li><a href="event.php">Event</a></li>
                 <li><a href="pendaftaran.php">Pendaftaran</a></li>
-                <li><a href="dokumentasi.php">Dokumentasi</a></li>
-                <li><a href="merchandise.php">Merchandise</a></li>
+                <li><a href="merchandise.php">Obat</a></li>
                 <li><a href="logout.php">Logout</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Daftar Anggota -->
+    <!-- Daftar Pasien -->
     <section class="text-center py-12">
     <h2 class="text-2xl font-bold mb-6">Daftar Pasien</h2>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-7xl mx-auto">
@@ -42,6 +53,11 @@ include 'db.php'; // Memastikan koneksi database di-load
                 echo "<img src='{$row['photo']}' alt='{$row['name']}' class='w-full h-32 object-cover mb-2 rounded-lg'>";
                 echo "<h3 class='text-lg font-semibold'>{$row['name']}</h3>";
                 echo "<p class='text-sm'>Kelas: {$row['class']}</p>";
+                echo "<p class='text-sm'>Alamat: {$row['alamat']}</p>";
+                echo "<p class='text-sm'>Agama: {$row['agama']}</p>";
+                echo "<p class='text-sm'>Kelamin: {$row['kelamin']}</p>";
+                echo "<a href='edit_patient.php?id={$row['id']}' class='text-blue-500 hover:underline'>Edit</a> | ";
+                echo "<a href='pasien.php?delete={$row['id']}' class='text-red-500 hover:underline' onclick='return confirm(\"Yakin ingin menghapus?\")'>Delete</a>";
                 echo "</div>";
             }
         } catch (PDOException $e) {
@@ -50,7 +66,6 @@ include 'db.php'; // Memastikan koneksi database di-load
         ?>
     </div>
 </section>
-
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8">
