@@ -36,7 +36,7 @@ $pdf->SetFont('courier', '', 12); // Gunakan font monospasi agar lebih mirip str
 $html = "
 <pre>
 --------------------------------------
-          Merdeka Basketball
+          Rumah Sakit
 Alamat: $alamat_toko
 No. Telepon: $no_telp_toko
 --------------------------------------
@@ -58,7 +58,7 @@ $html .= "
 --------------------------------------
 Total Harga: Rp " . number_format($total_harga, 0, ',', '.') . "
 --------------------------------------
-Terima kasih telah berbelanja di Merdeka Basketball!
+Terima kasih telah berbelanja di Rumah Sakit!
 </pre>";
 
 // Kosongkan keranjang setelah checkout
