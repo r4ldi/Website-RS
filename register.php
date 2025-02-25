@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </style>
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img class="mx-auto" src="merdek.png?color=indigo&shade=600" alt="Your Company" style="height: 100px; width: 100px;">
+            <img class="mx-auto" src="Hermina.png?color=indigo&shade=600" alt="Your Company" style="height: 100px; width: 100px;">
             <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Daftar Akun</h2>
         </div>
 

@@ -105,11 +105,12 @@ if (isset($_GET['delete'])) {
                     echo "<img src='{$row['photo']}' alt='{$row['name']}' class='w-full h-32 object-cover mb-2 rounded-lg'>";
                     echo "<h3 class='text-lg font-semibold'>{$row['name']}</h3>";
                     echo "<p class='text-sm'>Alamat: {$row['alamat']}</p>";
+                    echo "<p class='text-sm'>Pendidikan: {$row['pendidikan']}</p>";
                     echo "<p class='text-sm'>Agama: {$row['agama']}</p>";
                     echo "<p class='text-sm'>Kelamin: {$row['kelamin']}</p>";
-                    echo "<p class='text-sm'>Pendidikan: {$row['pendidikan']}</p>";
                     echo "<a href='edit_patient.php?id={$row['id']}' class='text-blue-500 hover:underline'>Edit</a> | ";
-                    echo "<a href='#' onclick='showDeletePopup({$row['id']})' class='text-red-500 hover:underline'>Delete</a>";
+                    echo "<a href='#' onclick='showDeletePopup({$row['id']})' class='text-red-500 hover:underline'>Delete</a> | ";
+                    echo "<a href='generate_pdf.php?id={$row['id']}' class='text-green-500 hover:underline'>Export PDF</a>";
                     echo "</div>";
                 }
             } catch (PDOException $e) {
