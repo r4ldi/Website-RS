@@ -23,14 +23,32 @@ try {
     <meta name="description" content="Rumah Sakit dengan pelayanan terbaik">
     <title>Rumah Sakit - Pilih Pelayanan Anda Sekarang!</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --cream: #f5fdc6ff;
+            --dark-moss-green: #41521fff;
+        }
+        .bg-cream {
+            background-color: var(--cream);
+        }
+        .bg-dark-moss-green {
+            background-color: var(--dark-moss-green);
+        }
+        .text-dark-moss-green {
+            color: var(--dark-moss-green);
+        }
+        .text-cream {
+            color: var(--cream);
+        }
+    </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-cream">
 
   <!-- Navbar -->
-  <nav class="bg-rose-600 p-4">
+  <nav class="bg-dark-moss-green p-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="main.php" class="text-white text-2xl font-bold font-serif">Hermina</a>
-            <ul class="flex space-x-6 text-white">
+            <a href="main.php" class="text-cream text-2xl font-bold font-serif">Hermina</a>
+            <ul class="flex space-x-6 text-cream">
                 <li><a href="main.php">Home</a></li>
                 <li><a href="dokter.php">Dokter</a></li>
                 <li><a href="pasien.php">Pasien</a></li>
@@ -59,7 +77,7 @@ try {
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
+    <footer class="bg-dark-moss-green text-cream py-8">
         <div class="max-w-7xl mx-auto text-center">
             <p>&copy; 2025 Rumah Sakit - Semua Hak Dilindungi.</p>
         </div>

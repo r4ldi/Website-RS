@@ -28,7 +28,7 @@ if (isset($_GET['delete'])) {
     <!-- Navbar -->
     <nav class="bg-rose-600 p-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="main.php" class="text-white text-2xl font-bold font-serif">Rumah Sakit</a>
+            <a href="main.php" class="text-white text-2xl font-bold font-serif">Hermina</a>
             <ul class="flex space-x-6 text-white">
                 <li><a href="main.php">Home</a></li>
                 <li><a href="dokter.php">Dokter</a></li>
