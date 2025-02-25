@@ -12,13 +12,52 @@ if (!isset($_SESSION['username'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dokter - Rumah Sakit</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --magnolia: #f7f0f5ff;
+            --dun: #decbb7ff;
+            --battleship-gray: #8f857dff;
+            --walnut-brown: #5c5552ff;
+            --van-dyke: #433633ff;
+        }
+        .bg-magnolia {
+            background-color: var(--magnolia);
+        }
+        .bg-dun {
+            background-color: var(--dun);
+        }
+        .bg-battleship-gray {
+            background-color: var(--battleship-gray);
+        }
+        .bg-walnut-brown {
+            background-color: var(--walnut-brown);
+        }
+        .bg-van-dyke {
+            background-color: var(--van-dyke);
+        }
+        .text-magnolia {
+            color: var(--magnolia);
+        }
+        .text-dun {
+            color: var(--dun);
+        }
+        .text-battleship-gray {
+            color: var(--battleship-gray);
+        }
+        .text-walnut-brown {
+            color: var(--walnut-brown);
+        }
+        .text-van-dyke {
+            color: var (--van-dyke);
+        }
+    </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-magnolia">
  <!-- Navbar -->
- <nav class="bg-rose-600 p-4">
+ <nav class="bg-van-dyke p-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="main.php" class="text-white text-2xl font-bold font-serif">Hermina</a>
-            <ul class="flex space-x-6 text-white">
+            <a href="main.php" class="text-magnolia text-2xl font-bold font-serif">Hermina</a>
+            <ul class="flex space-x-6 text-magnolia">
                 <li><a href="main.php">Home</a></li>
                 <li><a href="dokter.php">Dokter</a></li>
                 <li><a href="pasien.php">Pasien</a></li>
@@ -42,7 +81,7 @@ if (!isset($_SESSION['username'])) {
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
+    <footer class="bg-van-dyke text-magnolia py-8">
         <div class="max-w-7xl mx-auto text-center">
             <p>&copy; 2025 Rumah Sakit - Semua Hak Dilindungi.</p>
         </div>

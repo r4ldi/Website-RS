@@ -20,10 +20,10 @@ if (!$patient) {
 // Handle edit form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit_patient'])) {
     $name = $_POST['name'];
-    $class = $_POST['class'];
     $alamat = $_POST['alamat'];
     $agama = $_POST['agama'];
     $kelamin = $_POST['kelamin'];
+    $pendidikan = $_POST['pendidikan'];
     $photo = $_FILES['photo']['name'];
 
     if ($photo) {
@@ -35,8 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit_patient'])) {
     }
 
     try {
-        $stmt = $pdo->prepare("UPDATE patients SET name = ?, class = ?, alamat = ?, agama = ?, kelamin = ?, photo = ? WHERE id = ?");
-        $stmt->execute([$name, $class, $alamat, $agama, $kelamin, $target_file, $id]);
+        $stmt = $pdo->prepare("UPDATE patients SET name = ?, alamat = ?, pendidikan = ?, agama = ?, kelamin = ?, photo = ? WHERE id = ?");
+        $stmt->execute([$name, $alamat, $pendidikan, $agama, $kelamin, $target_file, $id]);
         header("Location: pasien.php");
         exit;
     } catch (PDOException $e) {
@@ -52,13 +52,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit_patient'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Pasien - Rumah Sakit</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --magnolia: #f7f0f5ff;
+            --dun: #decbb7ff;
+            --battleship-gray: #8f857dff;
+            --walnut-brown: #5c5552ff;
+            --van-dyke: #433633ff;
+        }
+        .bg-magnolia {
+            background-color: var(--magnolia);
+        }
+        .bg-dun {
+            background-color: var(--dun);
+        }
+        .bg-battleship-gray {
+            background-color: var(--battleship-gray);
+        }
+        .bg-walnut-brown {
+            background-color: var(--walnut-brown);
+        }
+        .bg-van-dyke {
+            background-color: var(--van-dyke);
+        }
+        .text-magnolia {
+            color: var(--magnolia);
+        }
+        .text-dun {
+            color: var(--dun);
+        }
+        .text-battleship-gray {
+            color: var(--battleship-gray);
+        }
+        .text-walnut-brown {
+            color: var(--walnut-brown);
+        }
+        .text-van-dyke {
+            color: var(--van-dyke);
+        }
+    </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-magnolia">
     <!-- Navbar -->
-    <nav class="bg-rose-600 p-4">
+    <nav class="bg-van-dyke p-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="main.php" class="text-white text-2xl font-bold font-serif">Rumah Sakit</a>
-            <ul class="flex space-x-6 text-white">
+            <a href="main.php" class="text-magnolia text-2xl font-bold font-serif">Hermina</a>
+            <ul class="flex space-x-6 text-magnolia">
                 <li><a href="main.php">Home</a></li>
                 <li><a href="dokter.php">Dokter</a></li>
                 <li><a href="pasien.php">Pasien</a></li>
@@ -80,12 +119,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit_patient'])) {
                     <input type="text" id="name" name="name" value="<?= $patient['name'] ?>" class="w-full border border-black p-2" required>
                 </div>
                 <div class="mb-4">
-                    <label for="class" class="block text-left font-semibold">Kelas</label>
-                    <input type="text" id="class" name="class" value="<?= $patient['class'] ?>" class="w-full border border-black p-2" required>
-                </div>
-                <div class="mb-4">
                     <label for="alamat" class="block text-left font-semibold">Alamat</label>
                     <input type="text" id="alamat" name="alamat" value="<?= $patient['alamat'] ?>" class="w-full border border-black p-2" required>
+                </div>
+                <div class="mb-4">
+                    <label for="pendidikan" class="block text-left font-semibold">Pendidikan</label>
+                    <select id="pendidikan" name="pendidikan" class="w-full border border-black p-2" required>
+                        <option value="SD" <?= $patient['pendidikan'] == 'SD' ? 'selected' : '' ?>>SD/MI/Sederajat</option>
+                        <option value="SMP" <?= $patient['pendidikan'] == 'SMP' ? 'selected' : '' ?>>SMP/MTs/Sederajat</option>
+                        <option value="SMA" <?= $patient['pendidikan'] == 'SMA' ? 'selected' : '' ?>>SMA/MA/SMK/Sederajat</option>
+                        <option value="Diploma" <?= $patient['pendidikan'] == 'Diploma' ? 'selected' : '' ?>>Diploma (D1, D2, D3)</option>
+                        <option value="Sarjana" <?= $patient['pendidikan'] == 'Sarjana' ? 'selected' : '' ?>>Sarjana (S1)</option>
+                        <option value="Magister" <?= $patient['pendidikan'] == 'Magister' ? 'selected' : '' ?>>Magister (S2)</option>
+                        <option value="Doktor" <?= $patient['pendidikan'] == 'Doktor' ? 'selected' : '' ?>>Doktor (S3)</option>
+                    </select>
                 </div>
                 <div class="mb-4">
                     <label for="agama" class="block text-left font-semibold">Agama</label>
@@ -109,13 +156,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit_patient'])) {
                     <label for="photo" class="block text-left font-semibold">Foto</label>
                     <input type="file" id="photo" name="photo" class="w-full border border-black p-2">
                 </div>
-                <button type="submit" name="edit_patient" class="w-full bg-gray-200 border border-black text-black p-2 font-bold">Update</button>
+                <button type="submit" name="edit_patient" class="w-full bg-dun border border-black text-black p-2 font-bold">Update</button>
             </form>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
+    <footer class="bg-van-dyke text-magnolia py-8">
         <div class="max-w-7xl mx-auto text-center">
             <p>&copy; 2025 Rumah Sakit - Semua Hak Dilindungi.</p>
         </div>

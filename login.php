@@ -35,6 +35,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Login</title>
+    <style>
+        :root {
+            --magnolia: #f7f0f5ff;
+            --dun: #decbb7ff;
+            --battleship-gray: #8f857dff;
+            --walnut-brown: #5c5552ff;
+            --van-dyke: #433633ff;
+        }
+        .bg-magnolia {
+            background-color: var(--magnolia);
+        }
+        .bg-dun {
+            background-color: var(--dun);
+        }
+        .bg-battleship-gray {
+            background-color: var(--battleship-gray);
+        }
+        .bg-walnut-brown {
+            background-color: var(--walnut-brown);
+        }
+        .bg-van-dyke {
+            background-color: var(--van-dyke);
+        }
+        .text-magnolia {
+            color: var(--magnolia);
+        }
+        .text-dun {
+            color: var(--dun);
+        }
+        .text-battleship-gray {
+            color: var(--battleship-gray);
+        }
+        .text-walnut-brown {
+            color: var(--walnut-brown);
+        }
+        .text-van-dyke {
+            color: var(--van-dyke);
+        }
+    </style>
 </head>
 <body>
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -48,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div>
                     <label for="username" class="block text-sm/6 font-medium text-gray-900">Username </label>
                     <div class="mt-2">
-                        <input id="username" name="username" type="text" autocomplete="text" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600">
+                        <input id="username" name="username" type="text" autocomplete="text" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 sm:leading-6">
                     </div>
                 </div>
 
@@ -57,12 +96,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <label for="password" class="block text-sm/6 font-medium text-gray-900">Password</label>
                     </div>
                     <div class="mt-2">
-                        <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600">
+                        <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 sm:leading-6">
                     </div>
                 </div>
 
                 <div>
-                    <button type="submit" class="flex w-full justify-center rounded-md bg-rose-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Login</button>
+                    <button type="submit" class="flex w-full justify-center rounded-md bg-van-dyke px-3 py-1.5 text-sm/6 font-semibold text-magnolia shadow-sm hover:bg-battleship-gray focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Login</button>
                 </div>
             </form>
 

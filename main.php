@@ -25,30 +25,50 @@ try {
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
-            --cream: #f5fdc6ff;
-            --dark-moss-green: #41521fff;
+            --magnolia: #f7f0f5ff;
+            --dun: #decbb7ff;
+            --battleship-gray: #8f857dff;
+            --walnut-brown: #5c5552ff;
+            --van-dyke: #433633ff;
         }
-        .bg-cream {
-            background-color: var(--cream);
+        .bg-magnolia {
+            background-color: var(--magnolia);
         }
-        .bg-dark-moss-green {
-            background-color: var(--dark-moss-green);
+        .bg-dun {
+            background-color: var(--dun);
         }
-        .text-dark-moss-green {
-            color: var(--dark-moss-green);
+        .bg-battleship-gray {
+            background-color: var(--battleship-gray);
         }
-        .text-cream {
-            color: var(--cream);
+        .bg-walnut-brown {
+            background-color: var(--walnut-brown);
+        }
+        .bg-van-dyke {
+            background-color: var(--van-dyke);
+        }
+        .text-magnolia {
+            color: var(--magnolia);
+        }
+        .text-dun {
+            color: var(--dun);
+        }
+        .text-battleship-gray {
+            color: var(--battleship-gray);
+        }
+        .text-walnut-brown {
+            color: var(--walnut-brown);
+        }
+        .text-van-dyke {
+            color: var(--van-dyke);
         }
     </style>
 </head>
-<body class="bg-cream">
-
+<body class="bg-magnolia">
   <!-- Navbar -->
-  <nav class="bg-dark-moss-green p-4">
+  <nav class="bg-van-dyke p-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="main.php" class="text-cream text-2xl font-bold font-serif">Hermina</a>
-            <ul class="flex space-x-6 text-cream">
+            <a href="main.php" class="text-magnolia text-2xl font-bold font-serif">Hermina</a>
+            <ul class="flex space-x-6 text-magnolia">
                 <li><a href="main.php">Home</a></li>
                 <li><a href="dokter.php">Dokter</a></li>
                 <li><a href="pasien.php">Pasien</a></li>
@@ -59,7 +79,6 @@ try {
             </ul>
         </div>
     </nav>
-
 
     <!-- Hero Section -->
     <section class="bg-cover bg-center h-96" style="background-image: url('images/hero-image.jpg');">
@@ -77,11 +96,10 @@ try {
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark-moss-green text-cream py-8">
+    <footer class="bg-van-dyke text-magnolia py-8">
         <div class="max-w-7xl mx-auto text-center">
             <p>&copy; 2025 Rumah Sakit - Semua Hak Dilindungi.</p>
         </div>
     </footer>
-
 </body>
 </html>

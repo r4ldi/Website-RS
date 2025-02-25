@@ -41,6 +41,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Registrasi</title>
 </head>
 <body>
+<style>
+        :root {
+            --magnolia: #f7f0f5ff;
+            --dun: #decbb7ff;
+            --battleship-gray: #8f857dff;
+            --walnut-brown: #5c5552ff;
+            --van-dyke: #433633ff;
+        }
+        .bg-magnolia {
+            background-color: var(--magnolia);
+        }
+        .bg-dun {
+            background-color: var(--dun);
+        }
+        .bg-battleship-gray {
+            background-color: var(--battleship-gray);
+        }
+        .bg-walnut-brown {
+            background-color: var(--walnut-brown);
+        }
+        .bg-van-dyke {
+            background-color: var(--van-dyke);
+        }
+        .text-magnolia {
+            color: var(--magnolia);
+        }
+        .text-dun {
+            color: var(--dun);
+        }
+        .text-battleship-gray {
+            color: var(--battleship-gray);
+        }
+        .text-walnut-brown {
+            color: var(--walnut-brown);
+        }
+        .text-van-dyke {
+            color: var(--van-dyke);
+        }
+    </style>
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <img class="mx-auto" src="merdek.png?color=indigo&shade=600" alt="Your Company" style="height: 100px; width: 100px;">
@@ -81,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <?php endif; ?>
 
                 <div>
-                    <button type="submit" class="flex w-full justify-center rounded-md bg-rose-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Daftar</button>
+                    <button type="submit" class="flex w-full justify-center rounded-md bg-van-dyke px-3 py-1.5 text-sm/6 font-semibold text-magnolia shadow-sm hover:bg-battleship-gray focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Daftar</button>
                 </div>
             </form>
 

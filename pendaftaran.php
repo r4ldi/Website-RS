@@ -8,10 +8,10 @@ $error = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = trim($_POST['name']);
     $email = trim($_POST['email']);
-    $class = $_POST['class'];
     $alamat = $_POST['alamat'];
     $agama = $_POST['agama'];
     $kelamin = $_POST['kelamin'];
+    $pendidikan = $_POST['pendidikan'];
     $photo = $_FILES['photo']['name'];
 
     $target_dir = "uploads/";
@@ -20,8 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Gagal mengunggah foto.";
     } else {
         try {
-            $stmt = $pdo->prepare("INSERT INTO patients (name, email, class, alamat, agama, kelamin, photo) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$name, $email, $class, $alamat, $agama, $kelamin, $target_file]);
+            $stmt = $pdo->prepare("INSERT INTO patients (name, email,alamat, pendidikan, agama, kelamin, photo) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$name, $email, $alamat, $pendidikan, $agama, $kelamin, $target_file]);
             $success = "Pasien berhasil didaftarkan!";
         } catch (PDOException $e) {
             $error = "Terjadi kesalahan saat mendaftar: " . $e->getMessage();
@@ -37,13 +37,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pendaftaran Pasien - Rumah Sakit</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --magnolia: #f7f0f5ff;
+            --dun: #decbb7ff;
+            --battleship-gray: #8f857dff;
+            --walnut-brown: #5c5552ff;
+            --van-dyke: #433633ff;
+        }
+        .bg-magnolia {
+            background-color: var(--magnolia);
+        }
+        .bg-dun {
+            background-color: var(--dun);
+        }
+        .bg-battleship-gray {
+            background-color: var(--battleship-gray);
+        }
+        .bg-walnut-brown {
+            background-color: var(--walnut-brown);
+        }
+        .bg-van-dyke {
+            background-color: var(--van-dyke);
+        }
+        .text-magnolia {
+            color: var(--magnolia);
+        }
+        .text-dun {
+            color: var(--dun);
+        }
+        .text-battleship-gray {
+            color: var(--battleship-gray);
+        }
+        .text-walnut-brown {
+            color: var(--walnut-brown);
+        }
+        .text-van-dyke {
+            color: var(--van-dyke);
+        }
+    </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-magnolia">
     <!-- Navbar -->
-    <nav class="bg-rose-600 p-4">
+    <nav class="bg-van-dyke p-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="main.php" class="text-white text-2xl font-bold font-serif">Hermina</a>
-            <ul class="flex space-x-6 text-white">
+            <a href="main.php" class="text-magnolia text-2xl font-bold font-serif">Hermina</a>
+            <ul class="flex space-x-6 text-magnolia">
                 <li><a href="main.php">Home</a></li>
                 <li><a href="dokter.php">Dokter</a></li>
                 <li><a href="pasien.php">Pasien</a></li>
@@ -75,12 +114,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="email" id="email" name="email" class="w-full border border-black p-2" required>
                 </div>
                 <div class="mb-4">
-                    <label for="class" class="block text-left font-semibold">Kelas</label>
-                    <input type="text" id="class" name="class" class="w-full border border-black p-2" required>
-                </div>
-                <div class="mb-4">
                     <label for="alamat" class="block text-left font-semibold">Alamat</label>
                     <input type="text" id="alamat" name="alamat" class="w-full border border-black p-2" required>
+                </div>
+                <div class="mb-4">
+                    <label for="pendidikan" class="block text-left font-semibold">Pendidikan</label>
+                    <select id="pendidikan" name="pendidikan" class="w-full border border-black p-2" required>
+                        <option value="SD">SD/MI/Sederajat</option>
+                        <option value="SMP">SMP/MTs/Sederajat</option>
+                        <option value="SMA">SMA/MA/SMK/Sederajat</option>
+                        <option value="Diploma">Diploma (D1, D2, D3)</option>
+                        <option value="Sarjana">Sarjana (S1)</option>
+                        <option value="Magister">Magister (S2)</option>
+                        <option value="Doktor">Doktor (S3)</option>
+                    </select>
                 </div>
                 <div class="mb-4">
                     <label for="agama" class="block text-left font-semibold">Agama</label>
@@ -104,13 +151,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="photo" class="block text-left font-semibold">Foto</label>
                     <input type="file" id="photo" name="photo" class="w-full border border-black p-2">
                 </div>
-                <button type="submit" class="w-full bg-gray-200 border border-black text-black p-2 font-bold">Daftar</button>
+                <button type="submit" class="w-full bg-dun border border-black text-black p-2 font-bold">Daftar</button>
             </form>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
+    <footer class="bg-van-dyke text-magnolia py-8">
         <div class="max-w-7xl mx-auto text-center">
             <p>&copy; 2025 Rumah Sakit - Semua Hak Dilindungi.</p>
         </div>
