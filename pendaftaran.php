@@ -86,7 +86,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <li><a href="main.php">Home</a></li>
                 <li><a href="dokter.php">Dokter</a></li>
                 <li><a href="pasien.php">Pasien</a></li>
-                <li><a href="event.php">Event</a></li>
                 <li><a href="pendaftaran.php">Pendaftaran</a></li>
                 <li><a href="merchandise.php">Obat</a></li>
                 <li><a href="logout.php">Logout</a></li>

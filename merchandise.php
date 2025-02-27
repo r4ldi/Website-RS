@@ -65,23 +65,61 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_cart'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tempat Beli Obat - Rumah Sakit</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --magnolia: #f7f0f5ff;
+            --dun: #decbb7ff;
+            --battleship-gray: #8f857dff;
+            --walnut-brown: #5c5552ff;
+            --van-dyke: #433633ff;
+        }
+        .bg-magnolia {
+            background-color: var(--magnolia);
+        }
+        .bg-dun {
+            background-color: var(--dun);
+        }
+        .bg-battleship-gray {
+            background-color: var(--battleship-gray);
+        }
+        .bg-walnut-brown {
+            background-color: var(--walnut-brown);
+        }
+        .bg-van-dyke {
+            background-color: var(--van-dyke);
+        }
+        .text-magnolia {
+            color: var(--magnolia);
+        }
+        .text-dun {
+            color: var(--dun);
+        }
+        .text-battleship-gray {
+            color: var(--battleship-gray);
+        }
+        .text-walnut-brown {
+            color: var(--walnut-brown);
+        }
+        .text-van-dyke {
+            color: var(--van-dyke);
+        }
+    </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-magnolia">
 
     <!-- Navbar -->
-    <nav class="bg-rose-600 p-4">
+    <nav class="bg-van-dyke p-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="main.php" class="flex items-center space-x-2">
-                <span class="text-white text-2xl font-bold font-serif">Hermina</span>
+                <span class="text-magnolia text-2xl font-bold font-serif">Hermina</span>
             </a>
-            <ul class="flex space-x-6 text-white">
-                <li><a href="main.php" class="hover:text-gray-300">Home</a></li>
-                <li><a href="dokter.php" class="hover:text-gray-300">Dokter</a></li>
-                <li><a href="pasien.php" class="hover:text-gray-300">Pasien</a></li>
-                <li><a href="event.php" class="hover:text-gray-300">Event</a></li>
-                <li><a href="pendaftaran.php" class="hover:text-gray-300">Pendaftaran</a></li>
-                <li><a href="merchandise.php" class="hover:text-gray-300">Obat</a></li>
-                <li><a href="logout.php" class="hover:text-gray-300">Logout</a></li>
+            <ul class="flex space-x-6 text-magnolia">
+                <li><a href="main.php" class="hover:text-dun">Home</a></li>
+                <li><a href="dokter.php" class="hover:text-dun">Dokter</a></li>
+                <li><a href="pasien.php" class="hover:text-dun">Pasien</a></li>
+                <li><a href="pendaftaran.php" class="hover:text-dun">Pendaftaran</a></li>
+                <li><a href="merchandise.php" class="hover:text-dun">Obat</a></li>
+                <li><a href="logout.php" class="hover:text-dun">Logout</a></li>
             </ul>
         </div>
     </nav>
@@ -91,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_cart'])) {
         <h2 class="text-3xl font-bold mb-6">Tempat Beli Obat</h2>
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
             <?php foreach ($obat as $item): ?>
-                <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="bg-dun p-6 rounded-lg shadow-md">
                     <img src="<?php echo $item['image']; ?>" alt="<?php echo $item['name']; ?>" class="w-full h-40 object-cover rounded-lg mb-4">
                     <h3 class="text-xl font-semibold"><?php echo $item['name']; ?></h3>
                     <p class="text-lg font-bold">Rp <?php echo number_format($item['price'], 0, ',', '.'); ?></p>
@@ -107,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_cart'])) {
     </section>
 
     <!-- Keranjang Belanja -->
-    <aside class="fixed top-20 right-10 bg-gray-800 text-white p-4 rounded-lg w-64">
+    <aside class="fixed top-20 right-10 bg-van-dyke text-magnolia p-4 rounded-lg w-64">
         <h3 class="font-bold text-xl mb-4">Keranjang</h3>
         <?php if (!empty($_SESSION['cart']) && is_array($_SESSION['cart'])) : ?>
             <?php $total = 0; ?>
@@ -132,7 +170,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_cart'])) {
             <hr class="my-2">
             <p class="text-right font-bold">Total: Rp <?= number_format($total, 0, ',', '.') ?></p>
             <form method="POST" action="checkout.php">
-                <button type="submit" class="bg-blue-500 mt-4 p-2 rounded text-white w-full">Check Out</button>
+                <button type="submit" class="bg-blue-500 mt-4 p-2 rounded text-magnolia w-full">Check Out</button>
             </form>
         <?php else : ?>
             <p>Keranjang kosong</p>
@@ -140,7 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_cart'])) {
     </aside>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
+    <footer class="bg-van-dyke text-magnolia py-8">
         <div class="max-w-7xl mx-auto text-center">
             <p>&copy; 2025 Rumah Sakit - Semua Hak Dilindungi.</p>
         </div>
