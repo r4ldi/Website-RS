@@ -54,15 +54,15 @@ if (!isset($_SESSION['username'])) {
 </head>
 <body class="bg-magnolia">
  <!-- Navbar -->
- <nav class="bg-van-dyke p-4">
+    <!-- Navbar -->
+    <nav class="bg-van-dyke p-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="main.php" class="text-magnolia text-2xl font-bold font-serif">Hermina</a>
+            <a href="main.php"><img src="Hermina.png" alt="Hermina" class="h-10"></a>
             <ul class="flex space-x-6 text-magnolia">
                 <li><a href="main.php">Home</a></li>
                 <li><a href="dokter.php">Dokter</a></li>
                 <li><a href="pasien.php">Pasien</a></li>
                 <li><a href="pendaftaran.php">Pendaftaran</a></li>
-                <li><a href="merchandise.php">Obat</a></li>
                 <li><a href="logout.php">Logout</a></li>
             </ul>
         </div>
@@ -70,7 +70,7 @@ if (!isset($_SESSION['username'])) {
 
     
     <!-- Dokter Section -->
-    <section class="flex flex-col items-center justify-center py-16 bg-white text-center">
+    <section class="flex flex-col items-center justify-center py-16 bg-magnolia text-center">
         <h2 class="text-3xl font-bold">Dokter</h2>
         <img src="Raldi.jpg" alt="Dokter" class="w-40 h-40 rounded-full mt-4">
         <h3 class="text-2xl font-semibold mt-2">Dr. Raldi</h3>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db.php'; // Memastikan koneksi database di-load
+include 'db.php'; // Pastikan koneksi database terhubung
 
 // Handle delete request
 if (isset($_GET['delete'])) {
@@ -22,47 +22,24 @@ if (isset($_GET['delete'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Pasien - Rumah Sakit</title>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root {
-            --magnolia: #f7f0f5ff;
-            --dun: #decbb7ff;
-            --battleship-gray: #8f857dff;
-            --walnut-brown: #5c5552ff;
-            --van-dyke: #433633ff;
-        }
-        .bg-magnolia {
-            background-color: var(--magnolia);
-        }
-        .bg-dun {
-            background-color: var(--dun);
-        }
-        .bg-battleship-gray {
-            background-color: var(--battleship-gray);
-        }
-        .bg-walnut-brown {
-            background-color: var(--walnut-brown);
-        }
-        .bg-van-dyke {
-            background-color: var(--van-dyke);
-        }
-        .text-magnolia {
-            color: var(--magnolia);
-        }
-        .text-dun {
-            color: var(--dun);
-        }
-        .text-battleship-gray {
-            color: var(--battleship-gray);
-        }
-        .text-walnut-brown {
-            color: var(--walnut-brown);
-        }
-        .text-van-dyke {
-            color: var(--van-dyke);
-        }
-    </style>
+
+    <!-- DataTables CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
     <script>
+        $(document).ready(function() {
+            $('#patientTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true
+            });
+        });
+
         function showDeletePopup(patientId) {
             const popup = document.getElementById('delete-popup');
             const deleteLink = document.getElementById('confirm-delete');
@@ -71,53 +48,78 @@ if (isset($_GET['delete'])) {
         }
 
         function hideDeletePopup() {
-            const popup = document.getElementById('delete-popup');
-            popup.classList.add('hidden');
+            document.getElementById('delete-popup').classList.add('hidden');
         }
     </script>
+
+    <style>
+        :root {
+            --magnolia: #f7f0f5ff;
+            --dun: #decbb7ff;
+            --battleship-gray: #8f857dff;
+            --walnut-brown: #5c5552ff;
+            --van-dyke: #433633ff;
+        }
+    </style>
 </head>
 <body class="bg-magnolia">
+
     <!-- Navbar -->
     <nav class="bg-van-dyke p-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="main.php" class="text-magnolia text-2xl font-bold font-serif">Hermina</a>
+            <a href="main.php"><img src="Hermina.png" alt="Hermina" class="h-10"></a>
             <ul class="flex space-x-6 text-magnolia">
                 <li><a href="main.php">Home</a></li>
                 <li><a href="dokter.php">Dokter</a></li>
                 <li><a href="pasien.php">Pasien</a></li>
                 <li><a href="pendaftaran.php">Pendaftaran</a></li>
-                <li><a href="merchandise.php">Obat</a></li>
+
                 <li><a href="logout.php">Logout</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Daftar Pasien -->
-    <section class="text-center py-12">
-        <h2 class="text-2xl font-bold mb-6">Daftar Pasien</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-7xl mx-auto">
-            <?php
-            try {
-                $stmt = $pdo->query("SELECT * FROM patients");
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    echo "<div class='bg-dun p-2 text-center rounded-lg shadow-md'>";
-                    echo "<img src='{$row['photo']}' alt='{$row['name']}' class='w-full h-32 object-cover mb-2 rounded-lg'>";
-                    echo "<h3 class='text-lg font-semibold'>{$row['name']}</h3>";
-                    echo "<p class='text-sm'>Alamat: {$row['alamat']}</p>";
-                    echo "<p class='text-sm'>Pendidikan: {$row['pendidikan']}</p>";
-                    echo "<p class='text-sm'>Agama: {$row['agama']}</p>";
-                    echo "<p class='text-sm'>Kelamin: {$row['kelamin']}</p>";
-                    echo "<a href='edit_patient.php?id={$row['id']}' class='text-blue-500 hover:underline'>Edit</a> | ";
-                    echo "<a href='#' onclick='showDeletePopup({$row['id']})' class='text-red-500 hover:underline'>Delete</a> | ";
-                    echo "<a href='generate_pdf.php?id={$row['id']}' class='text-green-500 hover:underline'>Export PDF</a>";
-                    echo "</div>";
+    <div class="max-w-7xl mx-auto py-12">
+        <h2 class="text-center text-2xl font-bold mb-6">Daftar Pasien</h2>
+        <table id="patientTable" class="display w-full bg-white shadow-md rounded-lg overflow-hidden">
+            <thead class="bg-dun text-black">
+                <tr>
+                    <th class="p-3">Foto</th>
+                    <th class="p-3">Nama</th>
+                    <th class="p-3">Alamat</th>
+                    <th class="p-3">Pendidikan</th>
+                    <th class="p-3">Agama</th>
+                    <th class="p-3">Kelamin</th>
+                    <th class="p-3">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                try {
+                    $stmt = $pdo->query("SELECT * FROM patients");
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        echo "<tr class='text-center border-b'>";
+                        echo "<td class='p-3'><img src='{$row['photo']}' alt='{$row['name']}' class='w-16 h-16 object-cover rounded-full'></td>";
+                        echo "<td class='p-3'>{$row['name']}</td>";
+                        echo "<td class='p-3'>{$row['alamat']}</td>";
+                        echo "<td class='p-3'>{$row['pendidikan']}</td>";
+                        echo "<td class='p-3'>{$row['agama']}</td>";
+                        echo "<td class='p-3'>{$row['kelamin']}</td>";
+                        echo "<td class='p-3'>
+                            <a href='edit_patient.php?id={$row['id']}' class='text-blue-500 hover:underline'>Edit</a> |
+                            <a href='#' onclick='showDeletePopup({$row['id']})' class='text-red-500 hover:underline'>Delete</a> |
+                            <a href='generate_pdf.php?id={$row['id']}' class='text-green-500 hover:underline'>Export PDF</a>
+                        </td>";
+                        echo "</tr>";
+                    }
+                } catch (PDOException $e) {
+                    echo "<tr><td colspan='7' class='text-center p-4 text-red-500'>Error: " . $e->getMessage() . "</td></tr>";
                 }
-            } catch (PDOException $e) {
-                echo "Error: " . $e->getMessage();
-            }
-            ?>
-        </div>
-    </section>
+                ?>
+            </tbody>
+        </table>
+    </div>
 
     <!-- Delete Confirmation Popup -->
     <div id="delete-popup" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
@@ -135,6 +137,7 @@ if (isset($_GET['delete'])) {
         <div class="max-w-7xl mx-auto text-center">
             <p>&copy; 2025 Rumah Sakit - Semua Hak Dilindungi.</p>
         </div>
-    </footer>
+
+
 </body>
 </html>

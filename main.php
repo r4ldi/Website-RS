@@ -65,15 +65,15 @@ try {
 </head>
 <body class="bg-magnolia">
   <!-- Navbar -->
-  <nav class="bg-van-dyke p-4">
+    <!-- Navbar -->
+    <nav class="bg-van-dyke p-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="main.php" class="text-magnolia text-2xl font-bold font-serif">Hermina</a>
+            <a href="main.php"><img src="Hermina.png" alt="Hermina" class="h-10"></a>
             <ul class="flex space-x-6 text-magnolia">
                 <li><a href="main.php">Home</a></li>
                 <li><a href="dokter.php">Dokter</a></li>
                 <li><a href="pasien.php">Pasien</a></li>
                 <li><a href="pendaftaran.php">Pendaftaran</a></li>
-                <li><a href="merchandise.php">Obat</a></li>
                 <li><a href="logout.php">Logout</a></li>
             </ul>
         </div>
