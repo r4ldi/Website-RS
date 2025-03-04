@@ -36,8 +36,12 @@ if (isset($_GET['delete'])) {
             $('#patientTable').DataTable({
                 "paging": true,
                 "searching": true,
-                "ordering": true
+                "ordering": true,
+                "dom": '<"flex justify-between items-center mb-4"<"flex flex-col items-start"<"search-container"f><"entries-container mt-2"l>><"add-button">>rt<"bottom flex justify-between"ip>',
             });
+
+            // Add button
+            $("div.add-button").html('<a href="pendaftaran.php" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Tambah Pasien</a>').addClass("text-right");
         });
 
         function showDeletePopup(patientId) {
@@ -88,11 +92,21 @@ if (isset($_GET['delete'])) {
             color: var(--walnut-brown);
         }
         .text-van-dyke {
-            color: var (--van-dyke);
+            color: var(--van-dyke);
+        }
+        .dataTables_filter {
+            float: left !important;
+            text-align: left !important;
+        }
+        .dataTables_length {
+            float: left !important;
+            text-align: left !important;
+            margin-top: 1rem !important;
         }
     </style>
 </head>
 <body class="bg-magnolia">
+
     <!-- Navbar -->
     <nav class="bg-van-dyke p-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
