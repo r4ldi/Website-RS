@@ -41,7 +41,7 @@ if (isset($_GET['delete'])) {
             });
 
             // Add button
-            $("div.add-button").html('<a href="pendaftaran.php" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Tambah Pasien</a>').addClass("text-right");
+            $("div.add-button").html('<a href="pendaftaran.php" class="ml-4 bg-blue-500 text-white px-4 py-2 rounded-lg">Tambah Pasien</a>');
         });
 
         function showDeletePopup(patientId) {
