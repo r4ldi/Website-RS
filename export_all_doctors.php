@@ -53,7 +53,7 @@ $html = "
         <tr>
             <th>Nama</th>
             <th>Spesialis</th>
-            <th>Email</th>
+            <th>Kelamin</th>
             <th>No Telp</th>
         </tr>
     </thead>
@@ -64,7 +64,7 @@ foreach ($doctors as $doctor) {
     <tr>
         <td>{$doctor['name']}</td>
         <td>{$doctor['specialty']}</td>
-        <td>{$doctor['email']}</td>
+        <td>{$doctor['kelamin']}</td>
         <td>{$doctor['phone']}</td>
     </tr>";
 }

@@ -133,7 +133,7 @@ if (isset($_GET['delete'])) {
                     <th class="p-3">Foto</th>
                     <th class="p-3">Nama</th>
                     <th class="p-3">Spesialis</th>
-                    <th class="p-3">Email</th>
+                    <th class="p-3">Jenis Kelamin</th>
                     <th class="p-3">No Telp</th>
                     <th class="p-3">Aksi</th>
                 </tr>
@@ -147,7 +147,7 @@ if (isset($_GET['delete'])) {
                         echo "<td class='p-3'><img src='{$row['photo']}' alt='{$row['name']}' class='w-16 h-16 object-cover rounded-full'></td>";
                         echo "<td class='p-3'>{$row['name']}</td>";
                         echo "<td class='p-3'>{$row['specialty']}</td>";
-                        echo "<td class='p-3'>{$row['email']}</td>";
+                        echo "<td class='p-3'>{$row['kelamin']}</td>";
                         echo "<td class='p-3'>{$row['phone']}</td>";
                         echo "<td class='p-3'>
                             <a href='edit_doctor.php?id={$row['id']}'><img src='edit.png' alt='Edit' class='inline w-6 h-6'></a> |
