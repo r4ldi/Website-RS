@@ -7,11 +7,12 @@ $error = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = trim($_POST['name']);
-    $email = trim($_POST['email']);
+    $tanggal_lahir = trim($_POST['tanggal_lahir']);
     $alamat = $_POST['alamat'];
     $agama = $_POST['agama'];
     $kelamin = $_POST['kelamin'];
     $pendidikan = $_POST['pendidikan'];
+    $diagnosa = $_POST['diagnosa'];
     $photo = $_FILES['photo']['name'];
 
     $target_dir = "uploads/";
@@ -20,8 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Gagal mengunggah foto.";
     } else {
         try {
-            $stmt = $pdo->prepare("INSERT INTO patients (name, email,alamat, pendidikan, agama, kelamin, photo) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$name, $email, $alamat, $pendidikan, $agama, $kelamin, $target_file]);
+            $stmt = $pdo->prepare("INSERT INTO patients (name, tanggal_lahir, alamat, pendidikan, agama, kelamin, diagnosa, photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$name, $tanggal_lahir, $alamat, $pendidikan, $agama, $kelamin, $diagnosa, $target_file]);
             $success = "Pasien berhasil didaftarkan!";
         } catch (PDOException $e) {
             $error = "Terjadi kesalahan saat mendaftar: " . $e->getMessage();
@@ -70,16 +71,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             color: var(--battleship-gray);
         }
         .text-walnut-brown {
-            color: var(--walnut-brown);
-        }
-        .text-van-dyke {
-            color: var(--van-dyke);
+            color: var (--walnut-brown);
         }
     </style>
 </head>
 <body class="bg-magnolia">
     <!-- Navbar -->
-   <!-- Navbar -->
    <nav class="bg-van-dyke p-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="main.php"><img src="Hermina.png" alt="Hermina" class="h-10"></a>
@@ -109,8 +106,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="text" id="name" name="name" class="w-full border border-black p-2" required>
                 </div>
                 <div class="mb-4">
-                    <label for="email" class="block text-left font-semibold">Email</label>
-                    <input type="email" id="email" name="email" class="w-full border border-black p-2" required>
+                    <label for="tanggal_lahir" class="block text-left font-semibold">Tanggal Lahir</label>
+                    <input type="date" id="tanggal_lahir" name="tanggal_lahir" class="w-full border border-black p-2" required>
                 </div>
                 <div class="mb-4">
                     <label for="alamat" class="block text-left font-semibold">Alamat</label>
@@ -141,10 +138,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="mb-4">
                     <label for="kelamin" class="block text-left font-semibold">Jenis Kelamin</label>
-                    <select id="kelamin" name="kelamin" class="w-full border border-black p-2" required>
-                        <option value="Laki-laki">Laki-laki</option>
-                        <option value="Perempuan">Perempuan</option>
-                    </select>
+                    <div class="flex justify-around">
+                        <label><input type="radio" name="kelamin" value="Laki-laki" required> Laki-laki</label>
+                        <label><input type="radio" name="kelamin" value="Perempuan" required> Perempuan</label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="diagnosa" class="block text-left font-semibold">Diagnosa Penyakit</label>
+                    <input type="text" id="diagnosa" name="diagnosa" class="w-full border border-black p-2" required>
                 </div>
                 <div class="mb-4">
                     <label for="photo" class="block text-left font-semibold">Foto</label>

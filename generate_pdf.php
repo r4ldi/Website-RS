@@ -86,6 +86,10 @@ $html = "
         <td>{$patient['name']}</td>
     </tr>
     <tr>
+        <th>Tanggal Lahir:</th>
+        <td>{$patient['tanggal_lahir']}</td>
+    </tr>
+    <tr>
         <th>Alamat:</th>
         <td>{$patient['alamat']}</td>
     </tr>
@@ -102,8 +106,8 @@ $html = "
         <td>{$patient['kelamin']}</td>
     </tr>
     <tr>
-        <th>Email:</th>
-        <td>{$patient['email']}</td>
+        <th>Diagnosa:</th>
+        <td>{$patient['diagnosa']}</td>
     </tr>
 </table>
 ";

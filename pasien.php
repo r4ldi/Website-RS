@@ -129,10 +129,12 @@ if (isset($_GET['delete'])) {
                 <tr>
                     <th class="p-3">Foto</th>
                     <th class="p-3">Nama</th>
+                    <th class="p-3">Tanggal Lahir</th>
                     <th class="p-3">Alamat</th>
                     <th class="p-3">Pendidikan</th>
                     <th class="p-3">Agama</th>
                     <th class="p-3">Kelamin</th>
+                    <th class="p-3">Diagnosa</th>
                     <th class="p-3">Aksi</th>
                 </tr>
             </thead>
@@ -144,10 +146,12 @@ if (isset($_GET['delete'])) {
                         echo "<tr class='text-center border-b'>";
                         echo "<td class='p-3'><img src='{$row['photo']}' alt='{$row['name']}' class='w-16 h-16 object-cover rounded-full'></td>";
                         echo "<td class='p-3'>{$row['name']}</td>";
+                        echo "<td class='p-3'>{$row['tanggal_lahir']}</td>";
                         echo "<td class='p-3'>{$row['alamat']}</td>";
                         echo "<td class='p-3'>{$row['pendidikan']}</td>";
                         echo "<td class='p-3'>{$row['agama']}</td>";
                         echo "<td class='p-3'>{$row['kelamin']}</td>";
+                        echo "<td class='p-3'>{$row['diagnosa']}</td>";
                         echo "<td class='p-3'>
                             <a href='edit_patient.php?id={$row['id']}'><img src='edit.png' alt='Edit' class='inline w-6 h-6'></a> |
                             <a href='#' onclick='showDeletePopup({$row['id']})'><img src='delete.png' alt='Delete' class='inline w-6 h-6'></a> |
@@ -156,7 +160,7 @@ if (isset($_GET['delete'])) {
                         echo "</tr>";
                     }
                 } catch (PDOException $e) {
-                    echo "<tr><td colspan='7' class='text-center p-4 text-red-500'>Error: " . $e->getMessage() . "</td></tr>";
+                    echo "<tr><td colspan='9' class='text-center p-4 text-red-500'>Error: " . $e->getMessage() . "</td></tr>";
                 }
                 ?>
             </tbody>

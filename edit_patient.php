@@ -20,10 +20,12 @@ if (!$patient) {
 // Handle edit form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit_patient'])) {
     $name = $_POST['name'];
+    $tanggal_lahir = $_POST['tanggal_lahir'];
     $alamat = $_POST['alamat'];
     $agama = $_POST['agama'];
     $kelamin = $_POST['kelamin'];
     $pendidikan = $_POST['pendidikan'];
+    $diagnosa = $_POST['diagnosa'];
     $photo = $_FILES['photo']['name'];
 
     if ($photo) {
@@ -35,8 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit_patient'])) {
     }
 
     try {
-        $stmt = $pdo->prepare("UPDATE patients SET name = ?, alamat = ?, pendidikan = ?, agama = ?, kelamin = ?, photo = ? WHERE id = ?");
-        $stmt->execute([$name, $alamat, $pendidikan, $agama, $kelamin, $target_file, $id]);
+        $stmt = $pdo->prepare("UPDATE patients SET name = ?, tanggal_lahir = ?, alamat = ?, pendidikan = ?, agama = ?, kelamin = ?, diagnosa = ?, photo = ? WHERE id = ?");
+        $stmt->execute([$name, $tanggal_lahir, $alamat, $pendidikan, $agama, $kelamin, $diagnosa, $target_file, $id]);
         header("Location: pasien.php");
         exit;
     } catch (PDOException $e) {
@@ -94,8 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit_patient'])) {
 </head>
 <body class="bg-magnolia">
     <!-- Navbar -->
-   <!-- Navbar -->
-   <nav class="bg-van-dyke p-4">
+    <nav class="bg-van-dyke p-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="main.php"><img src="Hermina.png" alt="Hermina" class="h-10"></a>
             <ul class="flex space-x-6 text-magnolia">
@@ -116,6 +117,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit_patient'])) {
                 <div class="mb-4">
                     <label for="name" class="block text-left font-semibold">Nama</label>
                     <input type="text" id="name" name="name" value="<?= $patient['name'] ?>" class="w-full border border-black p-2" required>
+                </div>
+                <div class="mb-4">
+                    <label for="tanggal_lahir" class="block text-left font-semibold">Tanggal Lahir</label>
+                    <input type="date" id="tanggal_lahir" name="tanggal_lahir" value="<?= $patient['tanggal_lahir'] ?>" class="w-full border border-black p-2" required>
                 </div>
                 <div class="mb-4">
                     <label for="alamat" class="block text-left font-semibold">Alamat</label>
@@ -146,10 +151,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit_patient'])) {
                 </div>
                 <div class="mb-4">
                     <label for="kelamin" class="block text-left font-semibold">Jenis Kelamin</label>
-                    <select id="kelamin" name="kelamin" class="w-full border border-black p-2" required>
-                        <option value="Laki-laki" <?= $patient['kelamin'] == 'Laki-laki' ? 'selected' : '' ?>>Laki-laki</option>
-                        <option value="Perempuan" <?= $patient['kelamin'] == 'Perempuan' ? 'selected' : '' ?>>Perempuan</option>
-                    </select>
+                    <div class="flex justify-around">
+                        <label><input type="radio" name="kelamin" value="Laki-laki" <?= $patient['kelamin'] == 'Laki-laki' ? 'checked' : '' ?> required> Laki-laki</label>
+                        <label><input type="radio" name="kelamin" value="Perempuan" <?= $patient['kelamin'] == 'Perempuan' ? 'checked' : '' ?> required> Perempuan</label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="diagnosa" class="block text-left font-semibold">Diagnosa Penyakit</label>
+                    <input type="text" id="diagnosa" name="diagnosa" value="<?= $patient['diagnosa'] ?>" class="w-full border border-black p-2" required>
                 </div>
                 <div class="mb-4">
                     <label for="photo" class="block text-left font-semibold">Foto</label>
