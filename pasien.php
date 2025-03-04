@@ -40,8 +40,11 @@ if (isset($_GET['delete'])) {
                 "dom": '<"flex justify-between items-center mb-4"<"flex flex-col items-start"<"search-container"f><"entries-container mt-2"l>><"add-button">>rt<"bottom flex justify-between"ip>',
             });
 
-            // Add button
-            $("div.add-button").html('<a href="pendaftaran.php" class="ml-4 bg-blue-500 text-white px-4 py-2 rounded-lg">Tambah Pasien</a>');
+            // Add buttons
+            $("div.add-button").html(
+                '<a href="pendaftaran.php" class="ml-4 bg-blue-500 text-white px-4 py-2 rounded-lg">Tambah Pasien</a>' +
+                '<a href="export_all_patients.php" class="ml-4"><img src="pdf.png" alt="Export PDF" class="inline w-6 h-6"></a>'
+            );
         });
 
         function showDeletePopup(patientId) {
