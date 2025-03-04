@@ -1,17 +1,64 @@
 <?php
 session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
-    exit;
+include 'db.php'; // Pastikan koneksi database terhubung
+
+// Handle delete request
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+    try {
+        $stmt = $pdo->prepare("DELETE FROM doctors WHERE id = ?");
+        $stmt->execute([$id]);
+        header("Location: dokter.php");
+        exit;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dokter - Rumah Sakit</title>
+    <title>Daftar Dokter - Rumah Sakit</title>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- DataTables CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#doctorTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "dom": '<"flex justify-between items-center mb-4"<"flex flex-col items-start"<"search-container"f><"entries-container mt-2"l>><"add-button">>rt<"bottom flex justify-between"ip>',
+            });
+
+            // Add buttons
+            $("div.add-button").html(
+                '<a href="pendaftaran_dokter.php" class="ml-4 bg-blue-500 text-white px-4 py-2 rounded-lg">Tambah Dokter</a>' +
+                '<a href="export_all_doctors.php" class="ml-4"><img src="pdf.png" alt="Export PDF" class="inline w-6 h-6"></a>'
+            );
+        });
+
+        function showDeletePopup(doctorId) {
+            const popup = document.getElementById('delete-popup');
+            const deleteLink = document.getElementById('confirm-delete');
+            deleteLink.href = 'dokter.php?delete=' + doctorId;
+            popup.classList.remove('hidden');
+        }
+
+        function hideDeletePopup() {
+            document.getElementById('delete-popup').classList.add('hidden');
+        }
+    </script>
+
     <style>
         :root {
             --magnolia: #f7f0f5ff;
@@ -48,12 +95,21 @@ if (!isset($_SESSION['username'])) {
             color: var(--walnut-brown);
         }
         .text-van-dyke {
-            color: var (--van-dyke);
+            color: var(--van-dyke);
+        }
+        .dataTables_filter {
+            float: left !important;
+            text-align: left !important;
+        }
+        .dataTables_length {
+            float: left !important;
+            text-align: left !important;
+            margin-top: 1rem !important;
         }
     </style>
 </head>
 <body class="bg-magnolia">
- <!-- Navbar -->
+
     <!-- Navbar -->
     <nav class="bg-van-dyke p-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
@@ -68,16 +124,56 @@ if (!isset($_SESSION['username'])) {
         </div>
     </nav>
 
-    
-    <!-- Dokter Section -->
-    <section class="flex flex-col items-center justify-center py-16 bg-magnolia text-center">
-        <h2 class="text-3xl font-bold">Dokter</h2>
-        <img src="Raldi.jpg" alt="Dokter" class="w-40 h-40 rounded-full mt-4">
-        <h3 class="text-2xl font-semibold mt-2">Dr. Raldi</h3>
-        <p class="text-lg mt-2">Email: <span class="font-bold">raldisikma123@gmail.com</span></p>
-        <p class="text-lg">Instagram: <span class="font-bold">@r4ldi</span></p>
-        <p class="text-lg">No Telp: <span class="font-bold">08123293434</span></p>
-    </section>
+    <!-- Daftar Dokter -->
+    <div class="max-w-7xl mx-auto py-12">
+        <h2 class="text-center text-2xl font-bold mb-6">Daftar Dokter</h2>
+        <table id="doctorTable" class="display w-full bg-white shadow-md rounded-lg overflow-hidden">
+            <thead class="bg-dun text-black">
+                <tr>
+                    <th class="p-3">Foto</th>
+                    <th class="p-3">Nama</th>
+                    <th class="p-3">Spesialis</th>
+                    <th class="p-3">Email</th>
+                    <th class="p-3">No Telp</th>
+                    <th class="p-3">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                try {
+                    $stmt = $pdo->query("SELECT * FROM doctors");
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        echo "<tr class='text-center border-b'>";
+                        echo "<td class='p-3'><img src='{$row['photo']}' alt='{$row['name']}' class='w-16 h-16 object-cover rounded-full'></td>";
+                        echo "<td class='p-3'>{$row['name']}</td>";
+                        echo "<td class='p-3'>{$row['specialty']}</td>";
+                        echo "<td class='p-3'>{$row['email']}</td>";
+                        echo "<td class='p-3'>{$row['phone']}</td>";
+                        echo "<td class='p-3'>
+                            <a href='edit_doctor.php?id={$row['id']}'><img src='edit.png' alt='Edit' class='inline w-6 h-6'></a> |
+                            <a href='#' onclick='showDeletePopup({$row['id']})'><img src='delete.png' alt='Delete' class='inline w-6 h-6'></a> |
+                            <a href='generate_pdf_doctor.php?id={$row['id']}'><img src='pdf.png' alt='Export PDF' class='inline w-6 h-6'></a>
+                        </td>";
+                        echo "</tr>";
+                    }
+                } catch (PDOException $e) {
+                    echo "<tr><td colspan='6' class='text-center p-4 text-red-500'>Error: " . $e->getMessage() . "</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Delete Confirmation Popup -->
+    <div id="delete-popup" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+            <h2 class="text-2xl font-bold mb-4">Yakin ingin menghapus?</h2>
+            <div class="flex justify-center space-x-4">
+                <a id="confirm-delete" href="#" class="bg-dun text-black px-4 py-2 rounded-lg">Hapus</a>
+                <button onclick="hideDeletePopup()" class="bg-gray-300 text-black px-4 py-2 rounded-lg">Batal</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-van-dyke text-magnolia py-8">
