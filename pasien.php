@@ -60,10 +60,39 @@ if (isset($_GET['delete'])) {
             --walnut-brown: #5c5552ff;
             --van-dyke: #433633ff;
         }
+        .bg-magnolia {
+            background-color: var(--magnolia);
+        }
+        .bg-dun {
+            background-color: var(--dun);
+        }
+        .bg-battleship-gray {
+            background-color: var(--battleship-gray);
+        }
+        .bg-walnut-brown {
+            background-color: var(--walnut-brown);
+        }
+        .bg-van-dyke {
+            background-color: var(--van-dyke);
+        }
+        .text-magnolia {
+            color: var(--magnolia);
+        }
+        .text-dun {
+            color: var(--dun);
+        }
+        .text-battleship-gray {
+            color: var(--battleship-gray);
+        }
+        .text-walnut-brown {
+            color: var(--walnut-brown);
+        }
+        .text-van-dyke {
+            color: var (--van-dyke);
+        }
     </style>
 </head>
 <body class="bg-magnolia">
-
     <!-- Navbar -->
     <nav class="bg-van-dyke p-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
@@ -73,7 +102,6 @@ if (isset($_GET['delete'])) {
                 <li><a href="dokter.php">Dokter</a></li>
                 <li><a href="pasien.php">Pasien</a></li>
                 <li><a href="pendaftaran.php">Pendaftaran</a></li>
-
                 <li><a href="logout.php">Logout</a></li>
             </ul>
         </div>
@@ -107,9 +135,9 @@ if (isset($_GET['delete'])) {
                         echo "<td class='p-3'>{$row['agama']}</td>";
                         echo "<td class='p-3'>{$row['kelamin']}</td>";
                         echo "<td class='p-3'>
-                            <a href='edit_patient.php?id={$row['id']}' class='text-blue-500 hover:underline'>Edit</a> |
-                            <a href='#' onclick='showDeletePopup({$row['id']})' class='text-red-500 hover:underline'>Delete</a> |
-                            <a href='generate_pdf.php?id={$row['id']}' class='text-green-500 hover:underline'>Export PDF</a>
+                            <a href='edit_patient.php?id={$row['id']}'><img src='edit.png' alt='Edit' class='inline w-6 h-6'></a> |
+                            <a href='#' onclick='showDeletePopup({$row['id']})'><img src='delete.png' alt='Delete' class='inline w-6 h-6'></a> |
+                            <a href='generate_pdf.php?id={$row['id']}'><img src='pdf.png' alt='Export PDF' class='inline w-6 h-6'></a>
                         </td>";
                         echo "</tr>";
                     }
@@ -137,7 +165,6 @@ if (isset($_GET['delete'])) {
         <div class="max-w-7xl mx-auto text-center">
             <p>&copy; 2025 Rumah Sakit - Semua Hak Dilindungi.</p>
         </div>
-
-
+    </footer>
 </body>
 </html>
